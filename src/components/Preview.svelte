@@ -4,11 +4,12 @@
 
   let previewSrc: string | null = null;
 
-  // Generate the preview on canvas
+  // Generate the preview on canvas whenever the file changes
   $: if (file) {
     generatePreview(file);
   }
 
+  // Function to generate preview of the image
   function generatePreview(file: File) {
     const reader = new FileReader();
 
@@ -21,14 +22,16 @@
         const ctx = canvas.getContext("2d");
 
         if (ctx) {
-          // Set the canvas size to the preview size (default is 256x256)
+          // Calculate aspect ratio and scaling
+          const scale = Math.max(size / img.width, size / img.height); // Ensure the image scales to fill the canvas
+          const x = (size - img.width * scale) / 2; // Center the image horizontally
+          const y = (size - img.height * scale) / 2; // Center the image vertically
+
+          // Fill the canvas with the image, scaling it to cover the entire square
           canvas.width = size;
           canvas.height = size;
-
-          // Stretch or compress the image to fit the square canvas
-          // This will stretch the image to cover the entire area
           ctx.clearRect(0, 0, size, size); // Clear any previous content
-          ctx.drawImage(img, 0, 0, size, size);  // Force the image to fit the square
+          ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
 
           // Generate the preview as a data URL
           previewSrc = canvas.toDataURL("image/png");
