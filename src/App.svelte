@@ -1,47 +1,38 @@
 <script lang="ts">
-  let file: File | null = null;
+  import FileUploader from './components/FileUploader.svelte';
+  import Preview from './components/Preview.svelte';
 
-  // Handle file selection
-  function handleFile(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      file = input.files[0];
-    }
-  }
+  let selectedFile: File | null = null;
 
   async function submitFile() {
-    if (!file) {
+    if (!selectedFile) {
       alert("Please select a file first!");
       return;
     }
 
     const formData = new FormData();
-    formData.append("image", file);
+    formData.append("image", selectedFile);
 
     try {
-      // Send the image to the backend
       const response = await fetch("http://localhost:5000/convert", {
         method: "POST",
         body: formData,
       });
 
       if (!response.ok) {
-        throw new Error("Failed to convert the image");
+        throw new Error("Failed to convert the image.");
       }
 
-      // Set the response as an ICO file
       const blob = await response.blob();
       const icoUrl = URL.createObjectURL(blob);
 
-      // Create a download link and trigger the download
+      // Trigger file download
       const link = document.createElement("a");
       link.href = icoUrl;
-      link.download = "converted.ico";  // Name for the downloaded file
+      link.download = "converted.ico";
       document.body.appendChild(link);
       link.click();
-      document.body.removeChild(link);  // Clean up
-
-      // alert(`File converted and downloaded as converted.ico`);
+      document.body.removeChild(link);
     } catch (error) {
       alert(`Error during conversion: ${error}`);
     }
@@ -50,13 +41,13 @@
 
 <main>
   <h1>Image to ICO Converter</h1>
-  <p>Upload an image to convert it to ICO format.</p>
+  <FileUploader onFileSelect={(file) => (selectedFile = file)} />
 
-  <!-- File input -->
-  <input type="file" accept="image/*" on:change={handleFile} />
+  {#if selectedFile}
+    <Preview file={selectedFile} /> <!-- Pass the correct prop: file={selectedFile} -->
+  {/if}
 
-  <!-- Submit button to trigger file conversion and download -->
-  <button on:click={submitFile}>Submit</button>
+  <button on:click={submitFile}>Convert to ICO</button>
 </main>
 
 <style>
