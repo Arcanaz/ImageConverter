@@ -51,7 +51,7 @@
 </main>
 
 <footer>
-  <img src="/static/images/orange-brush-stroke.png" alt="Footer Decoration" class="footer-banner" />
+  <img src="/orange-brush-stroke.png" alt="Footer Decoration" class="footer-banner" />
 </footer>
 
 <style>
