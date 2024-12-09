@@ -103,5 +103,6 @@
     object-position: top; /* Focus on the top part of the image */
   }
 
+  
 
 </style>
