@@ -1,0 +1,16 @@
+{
+    "name": "imageconverter",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+        "client",
+        "server"
+    ],
+    "scripts": {
+        "dev": "pnpm -r dev",
+        "build": "pnpm -r build"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.0"
+    }
+}
