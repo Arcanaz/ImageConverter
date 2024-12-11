@@ -1,0 +1,26 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",                        /* Allows the use of modern JavaScript features */
+    "useDefineForClassFields": true,            /* Ensure that class fields are defined using ESNext features */
+    "module": "ESNext",                         /* Use ESNext module system for compatibility with modern bundlers */
+    "resolveJsonModule": true,                  /* Allow importing JSON files as modules */
+    "allowJs": true,                            /* Allow JavaScript files to be part of the project */
+    "checkJs": true,                            /* Enable type-checking for JavaScript files */
+    "isolatedModules": true,                    /* Ensure each file can be transpiled independently */
+    "moduleDetection": "force",                 /* Force module detection */
+    "outDir": "./dist",                         /* Output directory for compiled files */
+    "rootDir": "./src",                         /* Root directory for source files */
+    "esModuleInterop": true,                    /* Enable compatibility between ESModules and CommonJS */
+    "strict": true,                             /* Enable all strict type-checking options */
+    "skipLibCheck": true                        /* Skip type-checking of declaration files */
+  },
+  "include": [
+    "src/**/*.ts",                             /* Include all TypeScript files in the src folder */
+    "src/**/*.js",                             /* Include all JavaScript files in the src folder */
+    "src/**/*.svelte"                          /* Include all Svelte files in the src folder */
+  ],
+  "references": [
+    { "path": "./tsconfig.node.json" }          /* Reference the node-specific TypeScript configuration if present */
+  ]
+}
