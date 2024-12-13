@@ -18,7 +18,7 @@ const sharp_1 = __importDefault(require("sharp"));
 const png_to_ico_1 = __importDefault(require("png-to-ico"));
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
-const port = process.env.PORT || 5000;
+const port = parseInt(process.env.PORT || "5000", 10);
 app.use((0, cors_1.default)());
 const storage = multer_1.default.memoryStorage();
 const upload = (0, multer_1.default)({ storage });
@@ -45,7 +45,7 @@ app.post("/convert", upload.single("image"), (req, res) => __awaiter(void 0, voi
         res.status(500).send("Error during file conversion.");
     }
 }));
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
     console.log(`Backend server is running on http://localhost:${port}`);
 });
 //# sourceMappingURL=server.js.map

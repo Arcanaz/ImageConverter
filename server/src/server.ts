@@ -6,7 +6,7 @@ import cors from "cors";
 import path from "path";
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = parseInt(process.env.PORT || "5000", 10); // Ensure port is a number
 
 app.use(cors());
 
@@ -50,6 +50,6 @@ app.post(
     }
 );
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
     console.log(`Backend server is running on http://localhost:${port}`);
 });

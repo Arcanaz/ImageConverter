@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite", 
     "build": "vite build",
+    "start": "vite build && vite preview",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json"
   },
@@ -20,4 +21,3 @@
     "vite": "^6.0.1"
   }
 }
-

@@ -4,7 +4,8 @@
     "private": true,
     "scripts": {
         "dev": "pnpm -r dev",
-        "build": "pnpm -r build"
+        "build": "pnpm -r build",
+        "start": "pnpm --filter server build && concurrently \"pnpm -r --filter server start\" \"pnpm -r --filter client start\""
     },
     "devDependencies": {
         "concurrently": "^8.2.0"

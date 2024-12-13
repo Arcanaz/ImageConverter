@@ -10,10 +10,11 @@
     try {
       const response = await fetch('/config.json'); // Adjust this path as necessary
       const config = await response.json();
-      backendUrl = config.backendUrl || 'http://localhost:5000'; // Default fallback
+      // Use 'host.docker.internal' for Docker container networking or fallback to localhost
+      backendUrl = config.backendUrl || 'http://host.docker.internal:5000'; // Default fallback for Docker
     } catch (error) {
       console.error('Failed to load backend URL:', error);
-      backendUrl = 'http://localhost:5000'; // Default fallback
+      backendUrl = 'http://host.docker.internal:5000'; // Default fallback for Docker
     }
   }
 
@@ -70,7 +71,6 @@
   <img src="/orange-brush-stroke.png" alt="Footer Decoration" class="footer-banner" />
 </footer>
 
-
 <style>
   /* Ensure the main content doesn't scroll unnecessarily */
 
@@ -114,7 +114,4 @@
     object-fit: cover;
     object-position: top; /* Focus on the top part of the image */
   }
-
-  
-
 </style>
